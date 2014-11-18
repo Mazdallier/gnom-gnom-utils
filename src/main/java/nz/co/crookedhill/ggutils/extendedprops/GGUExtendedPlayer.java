@@ -1,8 +1,17 @@
 package nz.co.crookedhill.ggutils.extendedprops;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
@@ -13,7 +22,9 @@ import nz.co.crookedhill.ggutils.proxy.CommonProxy;
 public class GGUExtendedPlayer implements IExtendedEntityProperties {
 
 	public static final String GGU_EXT_PLAYER = "gguProps";
-	private final EntityPlayer player;
+	public final EntityPlayer player;
+	public int currMana;
+	public List<ItemStack> inventory2;
 
 	/**
 	 * Constructor - make sure to init all variables.
@@ -22,6 +33,7 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 	 */
 	public GGUExtendedPlayer(EntityPlayer player){
 		this.player = player;
+		this.inventory2 = new ArrayList<ItemStack>();
 	}
 
 
@@ -35,13 +47,24 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
-
+		try {
+			properties.setByteArray("Inventory2", serialize(inventory2));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		compound.setTag(GGU_EXT_PLAYER, properties);
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(GGU_EXT_PLAYER);
+		try {
+			this.inventory2 = deserialize(properties.getByteArray("inventory2"));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*===============================================================================
@@ -56,6 +79,7 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 	 */
 	public static final void register(EntityPlayer player){
 		player.registerExtendedProperties(GGUExtendedPlayer.GGU_EXT_PLAYER, new GGUExtendedPlayer(player));
+
 	}
 
 	/**
@@ -105,6 +129,20 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 		NBTTagCompound savedData = new NBTTagCompound();
 		GGUExtendedPlayer.get(player).saveNBTData(savedData);
 		CommonProxy.storeEntityData(getSaveKey(player), savedData);
+	}
+	
+	
+	public byte[] serialize(List<ItemStack> otherInventory) throws IOException {
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		ObjectOutputStream o = new ObjectOutputStream(b);
+		o.writeObject(otherInventory);
+		return b.toByteArray();
+	}
+
+	public List<ItemStack> deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
+		ByteArrayInputStream b = new ByteArrayInputStream(bytes);
+		ObjectInputStream o = new ObjectInputStream(b);
+		return (List<ItemStack>)o.readObject();
 	}
 }
 
