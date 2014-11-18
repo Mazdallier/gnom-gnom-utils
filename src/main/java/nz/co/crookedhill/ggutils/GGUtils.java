@@ -17,6 +17,8 @@
 package nz.co.crookedhill.ggutils;
 
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.crafting.CraftingManager;
@@ -36,12 +38,15 @@ import nz.co.crookedhill.ggutils.handlers.GGUToolTipHandler;
 import nz.co.crookedhill.ggutils.handlers.GGUMobHandler;
 import nz.co.crookedhill.ggutils.helper.GGUConfigManager;
 import nz.co.crookedhill.ggutils.item.GGUItems;
+import nz.co.crookedhill.ggutils.network.GGUInventorySwitchHandler;
+import nz.co.crookedhill.ggutils.network.GGUInventorySwitchPacket;
 import nz.co.crookedhill.ggutils.network.GGUSortPacket;
 import nz.co.crookedhill.ggutils.network.GGUSortPacketHandler;
 import nz.co.crookedhill.ggutils.network.GGUSyncPlayerPropertiesPacketHandler;
 import nz.co.crookedhill.ggutils.network.GGUSyncPlayerPropsPacket;
 import nz.co.crookedhill.ggutils.proxy.CommonProxy;
 import nz.co.crookedhill.ggutils.util.GGURecipeManager;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -93,6 +98,7 @@ public class GGUtils
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("GGUChannel");
 		network.registerMessage(GGUSortPacketHandler.class, GGUSortPacket.class, 0, Side.SERVER);
 		network.registerMessage(GGUSyncPlayerPropertiesPacketHandler.class, GGUSyncPlayerPropsPacket.class, 1, Side.SERVER);
+		network.registerMessage(GGUInventorySwitchHandler.class, GGUInventorySwitchPacket.class, 2, Side.SERVER);
 
 		GGUConfigManager.init(event);
 		GGUItems.init();
@@ -109,6 +115,8 @@ public class GGUtils
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		arseTardis = new KeyBinding("key.arseTardis", Keyboard.KEY_O, "key.categories.GGUtils");
+		ClientRegistry.registerKeyBinding(arseTardis);
 		proxy.registerRenderers();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new CommonProxy());
 		MinecraftForge.EVENT_BUS.register(new GGUToolTipHandler());

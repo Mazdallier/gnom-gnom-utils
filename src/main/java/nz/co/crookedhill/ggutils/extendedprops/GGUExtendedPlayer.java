@@ -5,9 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -24,7 +21,7 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 	public static final String GGU_EXT_PLAYER = "gguProps";
 	public final EntityPlayer player;
 	public int currMana;
-	public List<ItemStack> inventory2;
+	public ItemStack[] inventory2 = {null, null, null, null, null, null,null, null, null};
 
 	/**
 	 * Constructor - make sure to init all variables.
@@ -33,7 +30,6 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 	 */
 	public GGUExtendedPlayer(EntityPlayer player){
 		this.player = player;
-		this.inventory2 = new ArrayList<ItemStack>();
 	}
 
 
@@ -132,17 +128,17 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 	}
 	
 	
-	public byte[] serialize(List<ItemStack> otherInventory) throws IOException {
+	public byte[] serialize(ItemStack[] otherInventory) throws IOException {
 		ByteArrayOutputStream b = new ByteArrayOutputStream();
 		ObjectOutputStream o = new ObjectOutputStream(b);
 		o.writeObject(otherInventory);
 		return b.toByteArray();
 	}
 
-	public List<ItemStack> deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
+	public ItemStack[] deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
 		ByteArrayInputStream b = new ByteArrayInputStream(bytes);
 		ObjectInputStream o = new ObjectInputStream(b);
-		return (List<ItemStack>)o.readObject();
+		return (ItemStack[])o.readObject();
 	}
 }
 
