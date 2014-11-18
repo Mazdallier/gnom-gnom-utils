@@ -17,6 +17,7 @@
 package nz.co.crookedhill.ggutils;
 
 
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -74,6 +75,7 @@ public class GGUtils
 	//Setting proxy for client and server side
 	@SidedProxy(clientSide = "nz.co.crookedhill.ggutils.proxy.ClientProxy", serverSide = "nz.co.crookedhill.ggutils.proxy.CommonProxy")
 	public static CommonProxy proxy;
+	public static KeyBinding arseTardis;
 
 	//Mod instance
 	@Instance(MODID)
