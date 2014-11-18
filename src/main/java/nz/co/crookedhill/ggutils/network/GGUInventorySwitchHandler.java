@@ -32,6 +32,7 @@ public class GGUInventorySwitchHandler implements IMessageHandler<GGUInventorySw
 		/* set the nbt hotbar to the buffer hotbar */
 		for(int i = 0; i < 9; i++)
 			nbtHotbar[i] = currHotbar.get(i);
+		GGUExtendedPlayer.get(player).inventory2 = nbtHotbar;
 		return inventory;
 	}
 
