@@ -16,8 +16,12 @@
 
 package nz.co.crookedhill.ggutils.item;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import nz.co.crookedhill.ggutils.GGUtils;
+import nz.co.crookedhill.ggutils.extendedprops.GGUExtendedPlayer;
 
 public class GGUWoodenGear extends Item
 {
@@ -25,5 +29,12 @@ public class GGUWoodenGear extends Item
 	{
 		this.setMaxStackSize(64);
 		this.setTextureName(GGUtils.MODID + ":woodenGear_texture");
+	}
+	
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int sumin, float f, float f2, float f3) {
+		GGUExtendedPlayer.get(player).currMana++;
+		System.out.println(GGUExtendedPlayer.get(player).currMana);
+		return true;
+		
 	}
 }

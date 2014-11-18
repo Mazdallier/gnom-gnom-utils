@@ -30,6 +30,7 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 	 */
 	public GGUExtendedPlayer(EntityPlayer player){
 		this.player = player;
+		this.currMana = 50;
 	}
 
 
@@ -45,6 +46,7 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 		NBTTagCompound properties = new NBTTagCompound();
 		try {
 			properties.setByteArray("Inventory2", serialize(inventory2));
+			properties.setInteger("mana", this.currMana);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -56,6 +58,7 @@ public class GGUExtendedPlayer implements IExtendedEntityProperties {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(GGU_EXT_PLAYER);
 		try {
 			this.inventory2 = deserialize(properties.getByteArray("inventory2"));
+			this.currMana = properties.getInteger("mana");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
