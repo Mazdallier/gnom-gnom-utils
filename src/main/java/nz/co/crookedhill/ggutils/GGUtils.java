@@ -30,6 +30,7 @@ import nz.co.crookedhill.ggutils.handlers.ExtendedPropertiesHandler;
 import nz.co.crookedhill.ggutils.handlers.GGUBlockHandler;
 import nz.co.crookedhill.ggutils.handlers.GGUCommandHandler;
 import nz.co.crookedhill.ggutils.handlers.GGUEnchantmentHandler;
+import nz.co.crookedhill.ggutils.handlers.GGUKeybindHandler;
 import nz.co.crookedhill.ggutils.handlers.GGUToolTipHandler;
 import nz.co.crookedhill.ggutils.handlers.GGUMobHandler;
 import nz.co.crookedhill.ggutils.helper.GGUConfigManager;
@@ -40,6 +41,7 @@ import nz.co.crookedhill.ggutils.network.GGUSyncPlayerPropertiesPacketHandler;
 import nz.co.crookedhill.ggutils.network.GGUSyncPlayerPropsPacket;
 import nz.co.crookedhill.ggutils.proxy.CommonProxy;
 import nz.co.crookedhill.ggutils.util.GGURecipeManager;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -112,6 +114,7 @@ public class GGUtils
 		MinecraftForge.EVENT_BUS.register(new GGUBlockHandler());
 		MinecraftForge.EVENT_BUS.register(new GGUEnchantmentHandler());
 		MinecraftForge.EVENT_BUS.register(new ExtendedPropertiesHandler());
+		FMLCommonHandler.instance().bus().register(new GGUKeybindHandler());
 
 	}
 
