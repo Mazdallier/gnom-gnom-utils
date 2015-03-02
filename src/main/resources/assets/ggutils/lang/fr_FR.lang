@@ -22,6 +22,11 @@ item.stableEnderiumRebirth.name=Cristal de renaissance d'enderium
 item.unstableEnderiumRebirth.name=Cristal de renaissance d'enderium instable
 item.betterBoat.name=Meilleur bateau
 item.selfPlaceCart.name=Chariot d'auto-endroit
+item.apitite_sword.name=Epée en apatite 
+item.apitite_pickaxe.name=Pioche en apatite 
+item.apitite_spade.name=Pelle en apatite 
+item.apitite_axe.name=Hache en apatite 
+item.apitite_hoe.name=Houe en apatite
 
 **********************************
 MOBS
