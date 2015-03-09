@@ -1,15 +1,15 @@
 **********************************
 BLOCKS
 **********************************
-tile.GrowthBlock.name=Remède de Damara (manuel)
-tile.GrowthBlockSemi.name=Remède de Damara (Semi-Auto)
+tile.GrowthBlock.name=Remède de Damara (Manuel)
+tile.GrowthBlockSemi.name=Remède de Damara (Semi-auto)
 tile.GrowthBlockAuto.name=Remède de Damara (Auto)
 tile.sortivator.name=Triviculteur
 tile.eggTimer.name=Sablier d'oeuf
 tile.lazyCrafter.name=Artisan paresseux
 tile.fabricator.name=Fabricateur
-tile.modularCore.name=Cœur de MESS
-tile.modularLimb.name=membre de MESS
+tile.modularCore.name=Coeur de MESS
+tile.modularLimb.name=Membre de MESS
 tile.cobbleDegen.name=Dégénérateur de pavés
 
 **********************************
@@ -22,6 +22,11 @@ item.stableEnderiumRebirth.name=Cristal de renaissance d'enderium
 item.unstableEnderiumRebirth.name=Cristal de renaissance d'enderium instable
 item.betterBoat.name=Meilleur bateau
 item.selfPlaceCart.name=Chariot d'auto-endroit
+item.apitite_sword.name=Epée d'apatite
+item.apitite_pickaxe.name=Pioche d'apitite
+item.apitite_spade.name=Pelle d'apitite
+item.apitite_axe.name=Hache d'apatite
+item.apitite_hoe.name=Houe d'apitite
 
 **********************************
 MOBS
